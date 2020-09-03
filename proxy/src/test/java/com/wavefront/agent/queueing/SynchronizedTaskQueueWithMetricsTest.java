@@ -2,7 +2,7 @@ package com.wavefront.agent.queueing;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.squareup.tape2.QueueFile;
+import com.squareup.tape2.DebuggableQueueFile;
 import com.wavefront.agent.data.DataSubmissionTask;
 import com.wavefront.agent.data.DefaultEntityPropertiesForTesting;
 import com.wavefront.agent.data.EventDataSubmissionTask;
@@ -111,7 +111,7 @@ public class SynchronizedTaskQueueWithMetricsTest {
   private <T extends DataSubmissionTask<T>> TaskQueue<T> getTaskQueue(
       File file, RetryTaskConverter.CompressionType compressionType) throws Exception {
     return new SynchronizedTaskQueueWithMetrics<>(new FileBasedTaskQueue<>(
-        new QueueFile.Builder(file).build(),
+        new DebuggableQueueFile.Builder(file).build(),
         new RetryTaskConverter<T>("2878",
             compressionType)),
         null, null, null);
